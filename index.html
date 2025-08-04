@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro Asteroid Blaster</title>
+    <title>Retro Asteroid Blaster | By @xsooxe</title>
     <style>
         body {
             margin: 0;
@@ -246,7 +246,7 @@
             <div class="content">
                 <canvas id="gameCanvas" width="800" height="600"></canvas>
                 
-                <div id="livesDisplay">Nyawa: <span>3</span></div>
+                <div id="livesDisplay">Life: <span>3</span></div>
                 <div class="scoreboard">
                     Score: <span id="currentScore">0</span> | High Score: <span id="highScore">0</span>
                 </div>
@@ -260,21 +260,21 @@
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/512px-Logo_of_Twitter.svg.png" alt="Twitter Icon">
                     </a>
                     <input type="text" id="twitterInput" placeholder="Masukkan nama Twitter (@namamu)">
-                    <button id="startButton">Mulai Permainan</button>
-                    <button id="showLeaderboardButton">Tampilkan Leaderboard</button>
+                    <button id="startButton">Start Game</button>
+                    <button id="showLeaderboardButton">Leaderboard</button>
                 </div>
 
                 <div class="game-overlay" id="gameOverScreen" style="display: none;">
                     <h2>GAME OVER</h2>
-                    <p>Skor Akhir: <span id="finalScore">0</span></p>
-                    <button id="retryButton">Coba Lagi</button>
-                    <button id="returnToStartButton">Kembali ke Awal</button>
+                    <p>Last Score: <span id="finalScore">0</span></p>
+                    <button id="retryButton">Try Again</button>
+                    <button id="returnToStartButton">Home</button>
                 </div>
                 
                 <div class="leaderboard-container" id="leaderboardContainer">
                     <h3>Leaderboard</h3>
                     <ol id="leaderboardList"></ol>
-                    <button id="closeLeaderboardButton">Kembali</button>
+                    <button id="closeLeaderboardButton">Back</button>
                 </div>
             </div>
         </div>
