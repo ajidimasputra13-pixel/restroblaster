@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Asteroid Blaster</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #A9B2BC;
+        }
+
+        .background-container {
+            padding: 10px;
+            background-color: #C0C0C0;
+            border: 1px solid #808080;
+            box-shadow: 
+                inset -1px -1px #000, 
+                inset 1px 1px #fff;
+        }
+
+        .window {
+            width: 800px;
+            height: 600px;
+            background-color: #C0C0C0;
+            border: 1px solid #808080;
+            box-shadow: 
+                inset -1px -1px #000, 
+                inset 1px 1px #fff;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .title-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #010079;
+            color: #fff;
+            padding: 2px 4px;
+            font-weight: bold;
+            border-bottom: 1px solid #808080;
+            cursor: default;
+        }
+
+        .title-text {
+            flex-grow: 1;
+        }
+
+        .window-buttons button {
+            width: 12px;
+            height: 12px;
+            margin-left: 2px;
+            border: 1px solid #000;
+            background-color: #C0C0C0;
+            box-shadow: 
+                inset -1px -1px #fff,
+                inset 1px 1px #808080;
+            cursor: pointer;
+        }
+
+        .window-buttons .close {
+            background-color: #d10000;
+        }
+
+        .content {
+            background-color: #fff;
+            flex-grow: 1;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        canvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: none;
+        }
+        
+        .game-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 10;
+        }
+
+        .logo-container {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .logo-container img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .game-overlay h1 {
+            color: #fff;
+            font-size: 2.5em;
+            text-shadow: 2px 2px #000;
+            margin: 0 0 10px 0;
+        }
+
+        .twitter-link img {
+            width: 24px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .game-overlay button,
+        .leaderboard-container button {
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: #C0C0C0;
+            border: 1px solid #000;
+            box-shadow: 
+                inset -1px -1px #fff,
+                inset 1px 1px #808080,
+                -1px -1px #000,
+                1px 1px #fff;
+            color: #000;
+            text-shadow: 1px 1px #fff;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 5px;
+        }
+        
+        .game-overlay button:hover,
+        .leaderboard-container button:hover {
+            background-color: #D1D1D1;
+        }
+
+        .game-overlay button:active,
+        .leaderboard-container button:active {
+            box-shadow: 
+                inset 1px 1px #000, 
+                inset -1px -1px #fff;
+            transform: translateY(1px);
+        }
+
+        .game-overlay input {
+            padding: 6px;
+            font-size: 14px;
+            border: 1px solid #000;
+            background-color: #fff;
+            box-shadow: 
+                inset -1px -1px #fff, 
+                inset 1px 1px #808080;
+            font-family: 'Courier New', Courier, monospace;
+            margin-bottom: 10px;
+        }
+
+        .leaderboard-container {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 11;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: #fff;
+        }
+
+        .leaderboard-container h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .leaderboard-container ol {
+            padding: 0;
+            list-style: none;
+            text-align: left;
+            width: 250px;
+        }
+        .leaderboard-container li {
+            padding: 6px;
+            background-color: #222;
+            margin-bottom: 3px;
+            border: 1px solid #fff;
+        }
+        .leaderboard-container button {
+            margin-top: 20px;
+        }
+        
+        .scoreboard {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 14px;
+            color: #fff;
+            z-index: 20;
+        }
+        
+        #livesDisplay {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: 14px;
+            color: #fff;
+            z-index: 20;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-container">
+        <div class="window">
+            <div class="title-bar">
+                <div class="title-text">Retro Asteroid Blaster</div>
+                <div class="window-buttons">
+                    <button class="minimize"></button>
+                    <button class="maximize"></button>
+                    <button class="close"></button>
+                </div>
+            </div>
+            <div class="content">
+                <canvas id="gameCanvas" width="800" height="600"></canvas>
+                
+                <div id="livesDisplay">Nyawa: <span>3</span></div>
+                <div class="scoreboard">
+                    Score: <span id="currentScore">0</span> | High Score: <span id="highScore">0</span>
+                </div>
+
+                <div class="game-overlay" id="startScreen">
+                    <div class="logo-container">
+                        <img src="logo.jpg" alt="Ethereum OS Logo">
+                    </div>
+                    <h1>Ethereum OS</h1>
+                    <a href="https://twitter.com/ethereum_os" target="_blank" class="twitter-link">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/512px-Logo_of_Twitter.svg.png" alt="Twitter Icon">
+                    </a>
+                    <input type="text" id="twitterInput" placeholder="Masukkan nama Twitter (@namamu)">
+                    <button id="startButton">Mulai Permainan</button>
+                    <button id="showLeaderboardButton">Tampilkan Leaderboard</button>
+                </div>
+
+                <div class="game-overlay" id="gameOverScreen" style="display: none;">
+                    <h2>GAME OVER</h2>
+                    <p>Skor Akhir: <span id="finalScore">0</span></p>
+                    <button id="retryButton">Coba Lagi</button>
+                    <button id="returnToStartButton">Kembali ke Awal</button>
+                </div>
+                
+                <div class="leaderboard-container" id="leaderboardContainer">
+                    <h3>Leaderboard</h3>
+                    <ol id="leaderboardList"></ol>
+                    <button id="closeLeaderboardButton">Kembali</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

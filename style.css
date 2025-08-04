@@ -1,0 +1,52 @@
+/* Gaya untuk tombol utama (Start, Retry, Tampilkan Leaderboard, dll.) */
+.game-overlay button,
+.leaderboard-container button,
+.window-buttons button {
+    /* Bentuk dan ukuran dasar */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+
+    /* Tampilan 3D retro */
+    background-color: #C0C0C0; /* Warna abu-abu dasar */
+    border: 2px solid #000;
+    box-shadow: 
+        inset -1px -1px #fff,
+        inset 1px 1px #808080,
+        -2px -2px #000,
+        2px 2px #fff;
+    color: #000; /* Warna teks hitam */
+    text-shadow: 1px 1px #fff; /* Efek teks timbul */
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Efek saat tombol dihover (pointer di atas tombol) */
+.game-overlay button:hover,
+.leaderboard-container button:hover,
+.window-buttons button:hover {
+    background-color: #D1D1D1; /* Sedikit lebih terang */
+}
+
+/* Efek saat tombol ditekan */
+.game-overlay button:active,
+.leaderboard-container button:active,
+.window-buttons button:active {
+    box-shadow: 
+        inset 1px 1px #000, 
+        inset -1px -1px #fff;
+    transform: translateY(1px); /* Tombol sedikit turun */
+}
+
+/* Gaya untuk input field */
+.game-overlay input {
+    padding: 8px;
+    font-size: 16px;
+    border: 2px solid #000;
+    background-color: #fff;
+    box-shadow: 
+        inset -1px -1px #fff, 
+        inset 1px 1px #808080;
+    font-family: 'Courier New', Courier, monospace;
+}
